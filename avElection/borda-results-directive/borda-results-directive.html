@@ -77,6 +77,12 @@
   </div>
 </div>
 <div ng-if="!showtable">
+
+     <!-- Donut graphic with results when question type is borda-nauru -->
+  <div col-xs-12 col-md-7 no-padding-left ng-if="question.tally_type == 'borda-nauru'">
+    <nvd3 options="options" data="data"></nvd3>
+  </div>
+
      <!-- Donut graphic with results when question type is borda -->
   <div col-xs-12 col-md-7 no-padding-left ng-if="question.tally_type == 'borda'">
     <nvd3 options="options" data="data"></nvd3>

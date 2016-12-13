@@ -70,34 +70,33 @@ angular.module('avElection')
         }
       };
 
-      /*
-      * Needed for showing the results in graphics
-      */
-      scope.options = {
-              chart: {
-                  type: 'pieChart',
-                  height: 450,
-                  donut: true,
-                  x: function(d){return d.key;},
-                  y: function(d){return d.y;},
-                  showLabels: true,
-
-                  pie: {
-                      startAngle: function(d) { return d.startAngle/2 -Math.PI/2; },
-                      endAngle: function(d) { return d.endAngle/2 -Math.PI/2; }
-                  },
-                  duration: 500,
-                  legend: {
-                      margin: {
-                          top: 5,
-                          right: 70,
-                          bottom: 5,
-                          left: 0
-                      }
-                  }
+          /*
+          * Needed for showing the results in graphics
+          */
+          scope.options = {
+            chart:{
+              type: 'pieChart',
+              height: 450,
+              donut: true,
+              x: function(d){return d.key;},
+              y: function(d){return d.y;},
+              showLabels: false,
+              pie:{
+                startAngle: function(d) { return d.startAngle/2 -Math.PI/2;},
+                endAngle: function(d) { return d.endAngle/2 -Math.PI/2;}
+              },
+              duration: 500,
+              legend: {
+                margin: {
+                            top: 25,
+                            right: 70,
+                            bottom: 5,
+                            left: 0
+                }
               }
+            }
           };
-          
+              
           var tableData = [];
           _.each(scope.question.answers, function(answer){
             var perc = PercentVotesService(answer.total_count, scope.question);

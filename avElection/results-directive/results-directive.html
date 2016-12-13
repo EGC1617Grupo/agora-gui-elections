@@ -62,6 +62,13 @@
         </div>
       </div>
     </div>
+    <div>
+      <ul class="nav nav-tabs" ng-init="showtable=true; classtable='active'; classgraph=''">
+    
+          <li ng-click="showtable=true; classtable='active'; classgraph=''" class="{{classtable}}"><a ng-i18next="avElection.public.showresults.table"></a></li>
+          <li ng-click="showtable=false; classgraph='active'; classtable=''" class="{{classgraph}}"><a ng-i18next="avElection.public.showresults.chart"></a></li>        
+      </ul>
+    </div>
     <div class="row">
       <div class="col-xs-12" ng-repeat="question in results.questions" av-question-results index="{{$index}}">
       </div>

@@ -1,15 +1,35 @@
-<h3>Q{{qindex}}. {{question.title}}</h3>
-<p ng-bind-html="question.description | addTargetBlank"></p>
-<p>
-  <span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.votingSystemText"></span>
-  <span ng-i18next="[html:i18next]({min: question.min, max: question.max, numWinners: question.num_winners})avElection.public.questionInfoText"></span>
-</p>
-<p ng-if="question.randomize_answer_order">
-  <strong ng-i18next="[i18next]({count: question.answers.length})avElection.public.answersRandomized"></strong>
-</p>
-<p ng-if="!question.randomize_answer_order">
-  <strong ng-i18next="[i18next]({count: question.answers.length})avElection.public.answers"></strong>
-</p>
-<ul>
-  <li ng-repeat="answer in question.answers">{{answer.text}}</li>
-</ul>
+<h3>Q{{qindex}}. {{question.title}}
+</h3>
+<div class="text-center">
+  <a href="javascript:;" ng-click="isHidden = !isHidden">
+    <span class="glyphicon glyphicon-chevron-down" />
+  </a>
+</div>
+<div ng-show="isHidden">
+  <p ng-bind-html="question.description | addTargetBlank"></p>
+  <p>
+    <span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.votingSystemText"></span>
+    <span ng-i18next="[html:i18next]({min: question.min, max: question.max, numWinners: question.num_winners})avElection.public.questionInfoText"></span>
+  </p>
+  <p ng-if="question.randomize_answer_order">
+    <strong ng-i18next="[i18next]({count: question.answers.length})avElection.public.answersRandomized"></strong>
+  </p>
+  <p ng-if="!question.randomize_answer_order">
+    <strong ng-i18next="[i18next]({count: question.answers.length})avElection.public.answers"></strong>
+  </p>
+  <div ng-repeat="answer in question.answers">
+    <div class="answer-header">
+      <h4>{{answer.text}}</h4>
+      <a ng-show="{{answer.urls || answer.category || answer.details}}" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
+    </div>
+    <div ng-show="{{answer.urls || answer.category || answer.details}}">
+      <div class="answer-info" ng-show="hiddenAnswer">
+        <p ng-show="answer.urls[1].url"><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
+        <p ng-show="answer.category"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span> {{answer.category}}</p>
+        <p ng-show="answer.urls[0].url"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.webPage"></span> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
+        <p ng-show="answer.details"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span></p>
+        <p><pre ng-show="answer.details">{{answer.details}}</pre></p>
+      </div>
+    </div>
+  </div>
+</div>

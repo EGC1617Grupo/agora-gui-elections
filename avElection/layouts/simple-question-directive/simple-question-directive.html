@@ -20,14 +20,16 @@
   <div ng-repeat="answer in question.answers">
     <div class="answer-header">
       <h4>{{answer.text}}</h4>
-      <a href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
+      <a ng-show="{{answer.urls || answer.category || answer.details}}" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
     </div>
-    <div class="answer-info" ng-show="hiddenAnswer">
-      <p><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
-      <p><strong>Category: </strong> {{answer.category}}</p>
-      <p><strong>Web page: </strong> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
-      <p><strong>Details: </strong></p>
-      <p><pre>{{answer.details}}</pre></p>
+    <div ng-show="{{answer.urls || answer.category || answer.details}}">
+      <div class="answer-info" ng-show="hiddenAnswer">
+        <p ng-show="answer.urls[1].url"><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
+        <p ng-show="answer.category"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span> {{answer.category}}</p>
+        <p ng-show="answer.urls[0].url"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.webPage"></span> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
+        <p ng-show="answer.details"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span></p>
+        <p><pre ng-show="answer.details">{{answer.details}}</pre></p>
+      </div>
     </div>
   </div>
 </div>

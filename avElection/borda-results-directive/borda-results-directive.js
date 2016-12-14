@@ -98,7 +98,6 @@ angular.module('avElection')
       _.each(scope.question.answers, function(answer){
         tableRows.push({key: answer.text, y:answer.total_count});
       });
-
       scope.data = tableRows;
 
 

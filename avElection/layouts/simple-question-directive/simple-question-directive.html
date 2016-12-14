@@ -1,9 +1,6 @@
-<h3>Q{{qindex}}. {{question.title}}
-</h3>
-<div class="text-center">
-  <a href="javascript:;" ng-click="isHidden = !isHidden">
-    <span class="glyphicon glyphicon-chevron-down" />
-  </a>
+<div class="answer-header">
+  <h3>Q{{qindex}}. {{question.title}}</h3>
+  <a href="javascript:;" ng-click="isHidden = !isHidden"><span class="glyphicon glyphicon-chevron-down" /></a>
 </div>
 <div ng-show="isHidden">
   <p ng-bind-html="question.description | addTargetBlank"></p>

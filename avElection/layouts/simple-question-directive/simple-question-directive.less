@@ -27,21 +27,30 @@
   .answer-img{
     max-width: 200px;
     max-height: 200px;
-    margin-top: 30px;
-
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .answer-info{
-    margin-left: 50px;
-    margin-bottom: 50px;
+    @media (min-width:768px){
+      margin-left: 50px; 
+    }
+
+    @media (max-width: 767px){
+      margin-bottom: 50px;
+    }
   }
 
-  .answer-header > h4 {
+  .answer-header > h3, .answer-header > h4 {
     display: inline-block;
   }
 
   .answer-header span {
     margin-left:10px;
+  }
+
+  body {
+    word-wrap: break-word;
   }
 
 }

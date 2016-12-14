@@ -17,7 +17,12 @@
   <p ng-if="!question.randomize_answer_order">
     <strong ng-i18next="[i18next]({count: question.answers.length})avElection.public.answers"></strong>
   </p>
-  <ul>
-    <li ng-repeat="answer in question.answers">{{answer.text}}</li>
-  </ul>
+  <div ng-repeat="answer in question.answers">
+    {{answer}}
+    <h4>{{answer.text}}</h4>
+    <p>{{answer.category}}</p>
+    <p>{{answer.description}}</p>
+    <p><a ng-href="{{answer.urls[0].url}}">Página web</a></p>
+    <p><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
+  </div>
 </div>

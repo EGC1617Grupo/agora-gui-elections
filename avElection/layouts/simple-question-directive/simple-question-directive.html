@@ -1,6 +1,7 @@
 <div class="answer-header">
   <h3>Q{{qindex}}. {{question.title}}</h3>
-  <a href="javascript:;" ng-click="isHidden = !isHidden"><span class="glyphicon glyphicon-chevron-down" /></a>
+  <a ng-show="!isHidden" href="javascript:;"><span class="glyphicon glyphicon-chevron-right" ng-click="isHidden = !isHidden"/></a>
+  <a ng-show="isHidden" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="isHidden = !isHidden"/></a>
 </div>
 <div ng-show="isHidden">
   <p ng-bind-html="question.description | addTargetBlank"></p>
@@ -17,7 +18,10 @@
   <div ng-repeat="answer in question.answers">
     <div class="answer-header">
       <h4>{{answer.text}}</h4>
-      <a ng-show="{{answer.urls || answer.category || answer.details}}" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
+      <span ng-show="{{answer.urls || answer.category || answer.details}}">
+        <a ng-show="!hiddenAnswer" href="javascript:;"><span class="glyphicon glyphicon-chevron-right" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
+        <a ng-show="hiddenAnswer" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
+      </span>
     </div>
     <div ng-show="{{answer.urls || answer.category || answer.details}}">
       <div class="answer-info" ng-show="hiddenAnswer">

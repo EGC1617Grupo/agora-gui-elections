@@ -1,7 +1,7 @@
 <h3>Q{{qindex}}. {{question.title}}
 </h3>
 <div class="text-center">
-  <a href="#" ng-click="isHidden = !isHidden">
+  <a href="javascript:;" ng-click="isHidden = !isHidden">
     <span class="glyphicon glyphicon-chevron-down" />
   </a>
 </div>
@@ -18,11 +18,16 @@
     <strong ng-i18next="[i18next]({count: question.answers.length})avElection.public.answers"></strong>
   </p>
   <div ng-repeat="answer in question.answers">
-    {{answer}}
-    <h4>{{answer.text}}</h4>
-    <p>{{answer.category}}</p>
-    <p>{{answer.description}}</p>
-    <p><a ng-href="{{answer.urls[0].url}}">Página web</a></p>
-    <p><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
+    <div class="answer-header">
+      <h4>{{answer.text}}</h4>
+      <a href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer"/></a>
+    </div>
+    <div class="answer-info" ng-show="hiddenAnswer">
+      <p><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
+      <p><strong>Category: </strong> {{answer.category}}</p>
+      <p><strong>Web page: </strong> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
+      <p><strong>Details: </strong></p>
+      <p><pre>{{answer.details}}</pre></p>
+    </div>
   </div>
 </div>

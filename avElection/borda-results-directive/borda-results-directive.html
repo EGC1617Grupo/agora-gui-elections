@@ -81,21 +81,29 @@
      <!-- Donut graphic with results when question type is borda-nauru -->
   <div col-xs-12 col-md-7 no-padding-left ng-if="question.tally_type == 'borda-nauru'">
     <nvd3 options="options" data="data"></nvd3>
+
+    <nvd3 options="optionsScrutinySummary" data="[{key: i18next('avElection.validVotes'), y: addDotsToIntNumber(question.totals.valid_votes)},{key: i18next('avElection.blankVotes'), y: addDotsToIntNumber(question.totals.blank_votes)},{key: i18next('avElection.nullVotes'), y: addDotsToIntNumber(question.totals.null_votes)}];"></nvd3>
   </div>
 
      <!-- Donut graphic with results when question type is borda -->
   <div col-xs-12 col-md-7 no-padding-left ng-if="question.tally_type == 'borda'">
     <nvd3 options="options" data="data"></nvd3>
+
+    <nvd3 options="optionsScrutinySummary" data="[{key: i18next('avElection.validVotes'), y: addDotsToIntNumber(question.totals.valid_votes)},{key: i18next('avElection.blankVotes'), y: addDotsToIntNumber(question.totals.blank_votes)},{key: i18next('avElection.nullVotes'), y: addDotsToIntNumber(question.totals.null_votes)}];"></nvd3>
   </div>
 
   <!-- Donut graphic with results when question type is plurality-at-large -->
   <div col-xs-12 col-md-7 no-padding-left ng-if="question.tally_type == 'plurality-at-large'">
     <nvd3 options="options" data="data"></nvd3>
+
+    <nvd3 options="optionsScrutinySummary" data="[{key: i18next('avElection.validVotes'), y: addDotsToIntNumber(question.totals.valid_votes)},{key: i18next('avElection.blankVotes'), y: addDotsToIntNumber(question.totals.blank_votes)},{key: i18next('avElection.nullVotes'), y: addDotsToIntNumber(question.totals.null_votes)}];"></nvd3>
   </div>
 
   <!-- Donut graphic with results when question type is pairwise -->
   <div col-xs-12 col-md-7 no-padding-left ng-if="question.tally_type == 'pairwise-beta'">
     <nvd3 options="options" data="data"></nvd3>
+
+    <nvd3 options="optionsScrutinySummary" data="[{key: i18next('avElection.validVotes'), y: addDotsToIntNumber(question.totals.valid_votes)},{key: i18next('avElection.blankVotes'), y: addDotsToIntNumber(question.totals.blank_votes)},{key: i18next('avElection.nullVotes'), y: addDotsToIntNumber(question.totals.null_votes)}];"></nvd3>
   </div>
 
 </div>

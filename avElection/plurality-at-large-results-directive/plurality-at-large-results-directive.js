@@ -20,7 +20,7 @@
  * is of show with the plurality at large layout
  */
 angular.module('avElection')
-  .directive('avPluralityAtLargeResults', function(AddDotsToIntService, PercentVotesService) {
+  .directive('avPluralityAtLargeResults', function(AddDotsToIntService, PercentVotesService, $i18next) {
     // works like a controller
     function link(scope, element, attrs) {
 
@@ -104,6 +104,29 @@ angular.module('avElection')
           });
 
           scope.data = tableData;
+
+      scope.i18next = $i18next;
+
+      scope.optionsScrutinySummary = {
+              chart: {
+                type: 'pieChart',
+                height: 500,
+                x: function(d){return d.key;},
+                y: function(d){return d.y;},
+                showLabels: false,
+                duration: 500,
+                labelThreshold: 0.01,
+                legend: {
+                    margin: {
+                        top: 5,
+                        right: 35,
+                        bottom: 5,
+                        left: 0
+                    }
+                }
+            }
+        };
+
     }
     return {
       restrict: 'AE',

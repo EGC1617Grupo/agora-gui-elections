@@ -91,7 +91,11 @@
       "status-results_pub": "Status: <strong>results published</strong>",
       "details": "<strong>Details: </strong>",
       "webPage": "<strong>Web page: </strong>",
-      "category": "<strong>Category: </strong>"
+      "category": "<strong>Category: </strong>",
+      "showresults": {
+        "table": "Numerical results",
+        "chart": "Graphical results"
+      }
     },
 
     "authorities": {

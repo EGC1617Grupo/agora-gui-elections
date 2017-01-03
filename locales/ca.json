@@ -87,7 +87,11 @@
       "status-results_pub": "Estado: <strong>resultados publicados</strong>",
       "details": "<strong>Detalls: </strong>",
       "webPage": "<strong>Pàgina web: </strong>",
-      "category": "<strong>Categoria: </strong>"
+      "category": "<strong>Categoria: </strong>",
+      "showresults": {
+        "table": "Resultats numèrics",
+        "chart": "Resultats gràfics"
+      }
     },
 
     "authorities": {

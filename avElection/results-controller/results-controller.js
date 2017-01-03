@@ -41,5 +41,8 @@ angular.module('avElection').controller('ResultsController',
       .error(function (error) {
         $state.go("election.results.error");
       });
+
+
+
   }
 );

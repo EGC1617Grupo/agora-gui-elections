@@ -1,16 +1,18 @@
 /* jshint ignore:start */
 describe("dynamic-directive tests", function () {
+ 
 
-  beforeEach(function () {
-    var html = '<textarea id="testTextArea" ng-model="testModel" ng-init="testModel = \'whatever\'"></textarea>';
-    browser.get('/#/unit-test-e2e?html=' + encodeURIComponent(html));
-  });
 
-  it("dynamic directive should work with content with angular directives", function () {
-    expect($('#testTextArea').isPresent()).toBe(true);
-    expect($('#testTextArea').getAttribute("ng-model")).toBe("testModel");
-    expect($('#testTextArea').getAttribute("value")).toBe("whatever");
-  });
+  it("should login as admin", function(){
+    browser.get('/admin/login')
+    var email = element(by.id('emailText'));
+    email.sendKeys('admin@agoravoting.com');
+    var pass = element(by.id('passwordText'));
+    pass.sendKeys('QWERTY33');
+    var button = element(by.css('.btn-success'));
+    button.click();
+    expect(element(by.id('content')).isDisplayed()).toBe(true);
+  })
 
 });
 /* jshint ignore:end */

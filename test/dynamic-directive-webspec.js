@@ -12,6 +12,7 @@ describe("dynamic-directive tests", function () {
     var button = element(by.css('.btn-success'));
     button.click();
     expect(element(by.id('content')).isDisplayed()).toBe(true);
+    expect(element(by.css('.input-group .form-control:first-child')).isDisplayed()).toBe(true);
   })
 
 });

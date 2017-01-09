@@ -10,6 +10,7 @@ describe("dynamic-directive tests", function () {
     var pass = element(by.id('passwordText'));
     pass.sendKeys('QWERTY33');
     var button = element(by.css('.btn-success'));
+    expect(element(by.css('.btn-success')).isDisplayed()).toBe(true);
     button.click();
     expect(element(by.id('content')).isDisplayed()).toBe(true);
     expect(element(by.css('.input-group .form-control:first-child')).isDisplayed()).toBe(true);

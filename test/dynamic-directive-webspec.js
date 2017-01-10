@@ -16,6 +16,7 @@ describe("dynamic-directive tests", function () {
     expect(element(by.css('.input-group .form-control:first-child')).isDisplayed()).toBe(true);
   })
 
+  /*
   //This test works only when the election with id 15 is created and the results of the election have been published
   it("should switch between tabs and check the content is correct", function () {
     browser.get('/election/15/public/home')
@@ -39,6 +40,7 @@ describe("dynamic-directive tests", function () {
     var chart = element(by.css('.nvd3-svg'));
     expect(chart.isPresent()).toBe(false);
   })
+  */
 
 });
 /* jshint ignore:end */

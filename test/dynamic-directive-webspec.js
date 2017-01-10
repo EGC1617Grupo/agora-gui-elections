@@ -16,5 +16,35 @@ describe("dynamic-directive tests", function () {
     expect(element(by.css('.input-group .form-control:first-child')).isDisplayed()).toBe(true);
   })
 
+  it("should switch between tabs and check the content is correct", function(){
+    browser.get('/election/15/public/home')
+    
+    let status = element.all(by.tagName('strong'));
+    var strong = status.get(1).getText();
+    if(strong!="results published"){
+      expect(true).toBe(true);
+    }else{
+      var table = element(by.css('.table'));
+      expect(table.isPresent()).toBe(true);
+      var chart = element(by.css('.nvd3-svg'));
+      expect(chart.isPresent()).toBe(false);
+
+      let list = element.all(by.css('.nav-tabs li'));
+
+      list.get(1).click();
+      var table = element(by.css('.table'));
+      expect(table.isPresent()).toBe(false);
+      var chart = element(by.css('.nvd3-svg'));
+      expect(chart.isPresent()).toBe(true);
+      
+      list.get(0).click();
+      var table = element(by.css('.table'));
+      expect(table.isPresent()).toBe(true);
+      var chart = element(by.css('.nvd3-svg'));
+      expect(chart.isPresent()).toBe(false);
+    }
+  })
+
+
 });
 /* jshint ignore:end */

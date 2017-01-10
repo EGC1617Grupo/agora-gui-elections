@@ -6,10 +6,7 @@
       <tbody>
         <tr>
           <td ng-i18next="avCommon.votingSystem" class="title"></td>
-          <td
-            colspan="2"
-            class="text-right"
-            ng-i18next="avCommon.votings.{{question.tally_type}}">
+          <td colspan="2" class="text-right" ng-i18next="avCommon.votings.{{question.tally_type}}">
           </td>
         </tr>
         <tr>
@@ -46,11 +43,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-            ng-repeat="answer in question.answers"
-            ng-class="{winner: winnerPosition(answer) > 0}"
-            style="background: linear-gradient(to right, rgba(220,220,220,1) 0%,rgba(220,220,220,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) 100%);">
-          <td>{{answer.text}}</td>
+        <tr ng-repeat="answer in question.answers" ng-class="{winner: winnerPosition(answer) > 0}" style="background: linear-gradient(to right, rgba(220,220,220,1) 0%,rgba(220,220,220,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) 100%);">
+          <td>
+            <div class="answer-header">
+              {{answer.text}}
+              <a ng-show="{{answer.urls || answer.category || answer.details}}" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer" /></a>
+            </div>
+            <div ng-show="{{answer.urls || answer.category || answer.details}}">
+              <div class="answer-info" ng-show="hiddenAnswer">
+                <p ng-show="answer.urls[1].url"><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img>
+                </p>
+                <p ng-show="answer.category"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span> {{answer.category}}</p>
+                <p ng-show="answer.urls[0].url"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.webPage"></span> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
+                <p ng-show="answer.details"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span></p>
+                <p>
+                  <pre ng-show="answer.details">{{answer.details}}</pre>
+                </p>
+              </div>
+            </div>
+          </td>
           <td class="text-right">{{numVotes(answer.total_count)}}</td>
           <td class="text-right">{{percentVotes(answer.total_count, question)}}</td>
           <td class="text-right">{{winnerPosition(answer)}}</td>

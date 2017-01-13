@@ -25,11 +25,11 @@
     </div>
     <div ng-show="{{answer.urls || answer.category || answer.details}}">
       <div class="answer-info" ng-show="hiddenAnswer">
-        <p ng-show="answer.urls[1].url"><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p>
-        <p ng-show="answer.category"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span> {{answer.category}}</p>
-        <p ng-show="answer.urls[0].url"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.webPage"></span> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
-        <p ng-show="answer.details"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span></p>
-        <p><pre ng-show="answer.details">{{answer.details}}</pre></p>
+        <div ng-show="imagesCb"><p ng-show="answer.urls[1].url"><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img></p></div>
+        <div ng-show="categoryCb"><p ng-show="answer.category"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span> {{answer.category}}</p></div>
+        <div ng-show="urlCb"><p ng-show="answer.urls[0].url"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.webPage"></span> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p></div>
+        <div ng-show="detailsCb"><p ng-show="answer.details"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.details"></span></p></div>
+        <div ng-show="detailsCb"><p><pre ng-show="answer.details">{{answer.details}}</pre></p></div>
       </div>
     </div>
   </div>

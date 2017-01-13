@@ -43,7 +43,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="answer in question.answers" ng-class="{winner: winnerPosition(answer) > 0}" style="background: linear-gradient(to right, rgba(220,220,220,1) 0%,rgba(220,220,220,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) 100%);">
+        <tr ng-repeat="answer in question.answers" ng-class="{winner: winnerPosition(answer) > 0}"
+            style="background: linear-gradient(to right, rgba(220,220,220,1) 0%,rgba(220,220,220,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) 100%);"
+            ng-show="numVotes(answer.total_count) > 0">
           <td>
             <div class="answer-header">
               {{answer.text}}

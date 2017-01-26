@@ -20,7 +20,7 @@
  * is of show with the plurality at large layout
  */
 angular.module('avElection')
-  .directive('avBordaResults', function(AddDotsToIntService, PercentVotesService) {
+  .directive('avBordaResults', function(AddDotsToIntService, PercentVotesService, $i18next) {
     // works like a controller
     function link(scope, element, attrs) {
 
@@ -69,6 +69,61 @@ angular.module('avElection')
           return "";
         }
       };
+
+      scope.options = {
+        chart:{
+          type: 'pieChart',
+          height: 450,
+          donut: true,
+          x: function(d){return d.key;},
+          y: function(d){return d.y;},
+          showLabels: false,
+          pie:{
+            startAngle: function(d) { return d.startAngle/2 -Math.PI/2;},
+            endAngle: function(d) { return d.endAngle/2 -Math.PI/2;}
+          },
+          duration: 500,
+          legend: {
+            margin: {
+                        top: 25,
+                        right: 70,
+                        bottom: 5,
+                        left: 0
+            }
+          }
+        }
+      };
+
+      var tableRows = [];
+      _.each(scope.question.answers, function(answer){
+        tableRows.push({key: answer.text, y:answer.total_count});
+      });
+      scope.data = tableRows;
+
+      scope.i18next = $i18next;
+
+      scope.optionsScrutinySummary = {
+            chart: {
+              type: 'pieChart',
+              height: 500,
+              x: function(d){return d.key;},
+              y: function(d){return d.y;},
+              showLabels: false,
+              duration: 500,
+              labelThreshold: 0.01,
+              legend: {
+                  margin: {
+                      top: 5,
+                      right: 35,
+                      bottom: 5,
+                      left: 0
+                  }
+              }
+          }
+      };
+
+
+
     }
     return {
       restrict: 'AE',

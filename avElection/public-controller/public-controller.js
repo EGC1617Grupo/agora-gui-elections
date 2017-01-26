@@ -29,6 +29,10 @@ angular.module('avElection').controller('PublicController',
     $scope.statePrefix = "election.public.show.home";
     $scope.inside_iframe = InsideIframeService();
     $scope.legal_html_include = ConfigService.legal_html_include;
+    $scope.imagesCb = true;
+    $scope.categoryCb = true;
+    $scope.urlCb = true;
+    $scope.detailsCb = true;
 
     // get election config
     var extra_data  = {};

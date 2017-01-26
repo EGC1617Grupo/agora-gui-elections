@@ -1,60 +1,81 @@
 <h2>{{question.title}}</h2>
 <p>{{question.description}}</p>
-<div class="col-xs-12 col-md-4 col-md-offset-1 pull-right">
-  <table class="table table-hover table-condensed resume">
-    <caption ng-i18next="avElection.resultsSummary"></caption>
-    <tbody>
-      <tr>
-        <td ng-i18next="avCommon.votingSystem" class="title"></td>
-        <td
-          colspan="2"
-          class="text-right"
-          ng-i18next="avCommon.votings.{{question.tally_type}}">
-        </td>
-      </tr>
-      <tr>
-        <td ng-i18next="avElection.totalNumberOfVotes" class="title"></td>
-        <td class="text-right">{{addDotsToIntNumber(question.totals.valid_votes + question.totals.null_votes + question.totals.blank_votes)}}</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td ng-i18next="avElection.validVotes" class="title"></td>
-        <td class="text-right">{{addDotsToIntNumber(question.totals.valid_votes)}}</td>
-        <td class="text-right">{{percentVotes(question.totals.valid_votes, question, "over-all-votes")}}</td>
-      </tr>
-      <tr>
-        <td ng-i18next="avElection.blankVotes" class="title"></td>
-        <td class="text-right">{{addDotsToIntNumber(question.totals.blank_votes)}}</td>
-        <td class="text-right">{{percentVotes(question.totals.blank_votes, question, "over-all-votes")}}</td>
-      </tr>
-      <tr>
-        <td ng-i18next="avElection.nullVotes" class="title"></td>
-        <td class="text-right">{{addDotsToIntNumber(question.totals.null_votes)}}</td>
-        <td class="text-right">{{percentVotes(question.totals.null_votes, question, "over-all-votes")}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div ng-if="showtable">
+  <div class="col-xs-12 col-md-4 col-md-offset-1 pull-right">
+    <table class="table table-hover table-condensed resume">
+      <caption ng-i18next="avElection.resultsSummary"></caption>
+      <tbody>
+        <tr>
+          <td ng-i18next="avCommon.votingSystem" class="title"></td>
+          <td colspan="2" class="text-right" ng-i18next="avCommon.votings.{{question.tally_type}}">
+          </td>
+        </tr>
+        <tr>
+          <td ng-i18next="avElection.totalNumberOfVotes" class="title"></td>
+          <td class="text-right">{{addDotsToIntNumber(question.totals.valid_votes + question.totals.null_votes + question.totals.blank_votes)}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td ng-i18next="avElection.validVotes" class="title"></td>
+          <td class="text-right">{{addDotsToIntNumber(question.totals.valid_votes)}}</td>
+          <td class="text-right">{{percentVotes(question.totals.valid_votes, question, "over-all-votes")}}</td>
+        </tr>
+        <tr>
+          <td ng-i18next="avElection.blankVotes" class="title"></td>
+          <td class="text-right">{{addDotsToIntNumber(question.totals.blank_votes)}}</td>
+          <td class="text-right">{{percentVotes(question.totals.blank_votes, question, "over-all-votes")}}</td>
+        </tr>
+        <tr>
+          <td ng-i18next="avElection.nullVotes" class="title"></td>
+          <td class="text-right">{{addDotsToIntNumber(question.totals.null_votes)}}</td>
+          <td class="text-right">{{percentVotes(question.totals.null_votes, question, "over-all-votes")}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-12 col-md-7 no-padding-left">
+    <table class="table table-hover table-condensed results">
+      <thead>
+        <tr>
+          <th ng-i18next="avElection.resultsTableCandidateHeader"></th>
+          <th ng-i18next="avElection.resultsTableVotesHeader" class="text-right"></th>
+          <th ng-i18next="avElection.resultsTableVotesPercentageHeader" class="text-right"></th>
+          <th ng-i18next="avElection.resultsTablePositionHeader" class="text-right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="answer in question.answers" ng-class="{winner: winnerPosition(answer) > 0}"
+            style="background: linear-gradient(to right, rgba(220,220,220,1) 0%,rgba(220,220,220,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) 100%);">
+          <td>
+            <div class="answer-header">
+              {{answer.text}}
+              <a ng-show="{{answer.urls || answer.category || answer.details}}" href="javascript:;"><span class="glyphicon glyphicon-chevron-down" ng-click="hiddenAnswer = !hiddenAnswer" /></a>
+            </div>
+            <div ng-show="{{answer.urls || answer.category || answer.details}}">
+              <div class="answer-info" ng-show="hiddenAnswer">
+                <p ng-show="answer.urls[1].url"><img class="img-responsive img-rounded answer-img" ng-src="{{answer.urls[1].url}}"></img>
+                </p>
+                <p ng-show="answer.category"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span> {{answer.category}}</p>
+                <p ng-show="answer.urls[0].url"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.webPage"></span> <a ng-href="{{answer.urls[0].url}}">{{answer.urls[0].url}}</a></p>
+                <p ng-show="answer.details"><span ng-i18next="[html:i18next]({method: tallyMethod})avElection.public.category"></span></p>
+                <p>
+                  <pre ng-show="answer.details">{{answer.details}}</pre>
+                </p>
+              </div>
+            </div>
+          </td>
+          <td class="text-right">{{numVotes(answer.total_count)}}</td>
+          <td class="text-right">{{percentVotes(answer.total_count, question)}}</td>
+          <td class="text-right">{{winnerPosition(answer)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<div class="col-xs-12 col-md-7 no-padding-left">
-  <table class="table table-hover table-condensed results">
-    <thead>
-      <tr>
-        <th ng-i18next="avElection.resultsTableCandidateHeader"></th>
-        <th ng-i18next="avElection.resultsTableVotesHeader" class="text-right"></th>
-        <th ng-i18next="avElection.resultsTableVotesPercentageHeader" class="text-right"></th>
-        <th ng-i18next="avElection.resultsTablePositionHeader" class="text-right"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-          ng-repeat="answer in question.answers"
-          ng-class="{winner: winnerPosition(answer) > 0}"
-          style="background: linear-gradient(to right, rgba(220,220,220,1) 0%,rgba(220,220,220,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) {{percentVotes(answer.total_votes, question)}},rgba(255,255,255,1) 100%);">
-        <td ng-bind-html="answer.text"></td>
-        <td class="text-right">{{numVotes(answer.total_count)}}</td>
-        <td class="text-right">{{percentVotes(answer.total_count, question)}}</td>
-        <td class="text-right">{{winnerPosition(answer)}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div ng-if="!showtable">
+  <div class="col-xs-12 col-md-7 no-padding-left" ng-if="question.tally_type == 'plurality-at-large'">
+    <nvd3 options="options" data="data"></nvd3>
+
+    <nvd3 options="optionsScrutinySummary" data="[{key: i18next('avElection.validVotes'), y: addDotsToIntNumber(question.totals.valid_votes)},{key: i18next('avElection.blankVotes'), y: addDotsToIntNumber(question.totals.blank_votes)},{key: i18next('avElection.nullVotes'), y: addDotsToIntNumber(question.totals.null_votes)}];"></nvd3>
+  </div>
 </div>

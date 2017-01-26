@@ -2,6 +2,12 @@
   <div class="election-status pull-right" ng-i18next="[html]avElection.public.status-{{electionState}}"></div>
   <div ng-if="electionState !== 'results_pub'">
     <h2 class="text-center text-av-secondary" ng-i18next="avElection.public.questionsTitle"></h2>
+    <div class="container">
+      <div class="form-group"><label class="col-xs-2" for="imageSCb">Images</label><input type="checkbox" name="imagesCb" ng-model="imagesCb" ng-init="checked=true"></div>
+      <div class="form-group"><label class="col-xs-2" for="categoryCb">Categories</label><input type="checkbox" name="categoryCb" ng-model="categoryCb" ng-init="checked=true"></div>
+      <div class="form-group"><label class="col-xs-2" for="urlCb">Urls</label><input type="checkbox" name="urlCb" ng-model="urlCb" ng-init="checked=true"></div>
+      <div class="form-group"><label class="col-xs-2" for="detailsCb">Details</label><input type="checkbox" name="detailsCb" ng-model="detailsCb" ng-init="checked=true"></div>
+    </div>  
     <div ave-question-info ng-repeat="question in election.questions" index="{{$index}}">
     </div>
   </div>
